@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import Paths from '@src/common/constants/Paths';
 import UserRoutes from './UserRoutes';
+import { getDb } from '@src/db/mongo';
 
 
 /******************************************************************************
@@ -9,6 +10,16 @@ import UserRoutes from './UserRoutes';
 ******************************************************************************/
 
 const apiRouter = Router();
+apiRouter.post('/submit', async (req, res) => {
+    try {
+        const db = getDb();
+        const result = await db.collection('monkeytype').insertOne(req.body);
+        res.status(201).json(result);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error adding typing test');
+    }
+})
 
 
 // ** Add UserRouter ** //

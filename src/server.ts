@@ -1,3 +1,4 @@
+import cors from 'cors';
 import morgan from 'morgan';
 import path from 'path';
 import helmet from 'helmet';
@@ -25,6 +26,9 @@ const app = express();
 // Basic middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+
+// hack
+app.use(cors());
 
 // Show routes called in console during development
 if (ENV.NodeEnv === NodeEnvs.Dev) {
