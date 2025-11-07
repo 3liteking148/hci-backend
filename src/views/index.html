@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    </head>
+    <body>
+        <div id="prompt">
+
+        </div>
+        <textarea id="input" style="width:100%;height:80%;font-size: 20px"></textarea>
+        <button id="100">100 words</button>
+        <button id="300">300 words</button>
+        <button id="submit">Submit</button>
+    </body>
+    <script>
+        const timings = {
+            name: "",
+            timestamp: new Date(),
+            logs: [],
+        };
+
+        const setPrompt = (text) => {
+            timings.timestamp = new Date();
+            timings.log = [];
+
+            $("#input").val('');
+            $("#prompt").text(text);
+        };
+        const cursor_change_handler = (time, action, element, eventCode) => {
+            const data = {
+                time,
+                action,
+                eventCode,
+                ...getCursorPosition(element),
+            };
+            timings.logs.push(data);
+        }
+        $(document).ready(function () {
+            $("#input").on("keyup", function() {
+                const time = performance.now();
+                cursor_change_handler(time, "keyup", this, event.keyZ);
+            });
+            $("#input").on("keydown", function(event) {
+                const time = performance.now();
+                cursor_change_handler(time, "keydown", this, event.key);
+            });
+            $("#input").on("click", function() {
+                const time = performance.now();
+                cursor_change_handler(time, "click", this);
+            });
+            $("#input").on("focus", function() {
+                const time = performance.now();
+                cursor_change_handler(time, "focus", this);
+            });
+            $("#input").on("input", function(event) {
+                const time = performance.now();
+                const inputEvent = event?.originalEvent;
+                const eventCode = `${inputEvent.inputType},${inputEvent.data?.toString() ?? "undefined"}`;
+                cursor_change_handler(time, "input", this, eventCode);
+            });
+
+            $("#submit").on("click", async (e) => {
+                const ret = await fetch(`/api/submit`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(timings),
+                });
+                alert(ret.status === 201 ? "Uploaded to DB successfully" : "Error uploading to DB");
+            });
+
+            $("#300").on("click", () => {
+                setPrompt(`
+                    The sea whispered against the rocks; its voice was low and endless. Salt drifted through the air, clinging to skin, to thought, to everything alive! Each wave seemed to carry a fragment of memory, something once known and half forgotten. A gull cried in the distance; its echo folded into the wide horizon. The sky deepened toward blue, and sunlight scattered across the surface like restless fire.
+
+                    A lone figure walked the shore, tracing lines in the wet sand that vanished moments later. He wondered, "Is anything meant to last?" Or is every beautiful thing destined to fade?
+
+                    Behind him, a small quiet town stirred to life. The smell of bread floated from a bakery, blending with the scent of seaweed and oil. Windows opened; voices joined the morning air, warm, imperfect, ordinary. The world, he thought, was both fragile and relentless. It broke and built itself again with each rising tide!
+
+                    He paused beside a piece of driftwood, bleached by years of sun. The wood was smooth, nearly silver, carved by patience alone. He picked it up, feeling the cool texture beneath his fingertips, and set it upright like a marker. The gesture meant nothing, or perhaps everything, a quiet offering to the vastness around him.
+
+                    The wind lifted, curling through his hair, carrying the sound of bells from the harbor. Boats shifted softly; ropes creaked; somewhere, a dog barked! He looked once more toward the horizon, where water met sky: that endless meeting of motion and stillness. Then he turned back toward the path, sand clinging to his shoes, the rhythm of the sea fading behind him. "The world continues," he thought, "quiet, infinite, and alive!" And for a moment, he smiled, feeling peace settle gently within his wandering heart, calm and whole again.
+                    `)
+            });
+            timings.name = prompt("Enter name");
+        });
+        function getCursorPosition(element) {
+            // ref: https://stackoverflow.com/a/19803814/387194
+            var el = $(element).get(0);
+            var pos = 0, total = el.value.length;
+            if ('selectionStart' in el) {
+                pos = el.selectionStart;
+            } else if ('selection' in document) {
+                el.focus();
+                var Sel = document.selection.createRange();
+                var SelLength = document.selection.createRange().text.length;
+                Sel.moveStart('character', -el.value.length);
+                pos = Sel.text.length - SelLength;
+            }
+            return {
+                pos,
+                total
+            };
+        }
+    </script>
+</html>
