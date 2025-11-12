@@ -108,7 +108,7 @@ The wind lifted, curling through his hair, carrying the sound of bells from the 
         function getCursorPosition(element) {
             // ref: https://stackoverflow.com/a/19803814/387194
             var el = $(element).get(0);
-            var pos = 0, total = el.value.length;
+            var pos = 0, total = el.value.length, totalTrimmed = el.value.trimEnd().length;
             if ('selectionStart' in el) {
                 pos = el.selectionStart;
             } else if ('selection' in document) {
@@ -120,7 +120,8 @@ The wind lifted, curling through his hair, carrying the sound of bells from the 
             }
             return {
                 pos,
-                total
+                total,
+                totalTrimmed // removes extra whitespace at end if any
             };
         }
     </script>
