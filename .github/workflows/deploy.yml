@@ -17,5 +17,5 @@ jobs:
 
       - name: Restart app
         run: |
-          pkill -f "npm run dev" || true
-          nohup npm run dev > dev.log 2>&1 &
+          screen -S devapp -X quit || true
+          screen -dmS devapp bash -c "npm run dev"
