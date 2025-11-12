@@ -14,6 +14,8 @@
     <script>
         const timings = {
             name: "",
+            userAgent: navigator.userAgent,
+            isMobile: /iPhone|iPad|iPod|Android/i.test(navigator.userAgent),
             timestamp: new Date(),
             logs: [],
         };
