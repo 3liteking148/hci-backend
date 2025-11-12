@@ -100,7 +100,10 @@ He paused beside a piece of driftwood, bleached by years of sun. The wood was sm
 
 The wind lifted, curling through his hair, carrying the sound of bells from the harbor. Boats shifted softly; ropes creaked; somewhere, a dog barked! He looked once more toward the horizon, where water met sky: that endless meeting of motion and stillness. Then he turned back toward the path, sand clinging to his shoes, the rhythm of the sea fading behind him. "The world continues," he thought, "quiet, infinite, and alive!" And for a moment, he smiled, feeling peace settle gently within his wandering heart, calm and whole again.`)
             });
-            timings.name = prompt("Enter name");
+
+            while(!timings.name) {
+                timings.name = prompt("Enter name");
+            }
         });
         function getCursorPosition(element) {
             // ref: https://stackoverflow.com/a/19803814/387194
