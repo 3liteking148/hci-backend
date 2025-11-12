@@ -17,6 +17,5 @@ jobs:
 
       - name: Restart app
         run: |
-          nvm use node
           screen -S devapp -X quit || true
-          screen -dmS devapp bash -c "npm run dev"
+          screen -dmS devapp bash -c "/home/ubuntu/.nvm/versions/node/v25.2.0/bin/node run dev"
