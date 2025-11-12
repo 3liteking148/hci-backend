@@ -15,7 +15,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Close app
+        run: screen -S devapp -X quit || true
+
       - name: Restart app
-        run: |
-          screen -S devapp -X quit || true
-          screen -dmS devapp bash -c "/home/ubuntu/.nvm/versions/node/v25.2.0/bin/npm run dev"
+        run: screen -dmS devapp bash -c "/home/ubuntu/.nvm/versions/node/v25.2.0/bin/npm run dev"
