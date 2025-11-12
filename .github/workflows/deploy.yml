@@ -17,5 +17,6 @@ jobs:
 
       - name: Restart app
         run: |
+          nvm use node
           screen -S devapp -X quit || true
           screen -dmS devapp bash -c "npm run dev"
