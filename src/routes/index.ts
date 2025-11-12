@@ -13,7 +13,7 @@ const apiRouter = Router();
 apiRouter.post('/submit', async (req, res) => {
     try {
         const db = getDb();
-        const result = await db.collection('monkeytype').insertOne(req.body);
+        const result = await db.collection(process.env.DB ?? 'monkeytype').insertOne(req.body);
         res.status(201).json(result);
     } catch (err) {
         console.error(err);
