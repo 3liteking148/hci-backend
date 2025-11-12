@@ -1,9 +1,23 @@
 <html>
     <head>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+        <style>
+            .roboto-text {
+                font-family: "Roboto", sans-serif;
+                font-optical-sizing: auto;
+                font-weight: normal;
+                font-style: normal;
+                font-variation-settings:
+                    "wdth" 100;
+                }
+        </style>
     </head>
     <body>
-        <div id="prompt">
+        <div id="prompt" class="roboto-text" style="white-space: pre-wrap; margin: 1rem;">
 
         </div>
         <textarea id="input" style="width:100%;height:80%;font-size: 20px"></textarea>
@@ -71,18 +85,20 @@
                 alert(ret.status === 201 ? "Uploaded to DB successfully" : "Error uploading to DB");
             });
 
+            $("#100").on("click", () => {
+                setPrompt(`Beneath the quiet rhythm of the morning, a gentle breeze carried the scent of rain across the open field. The sky shimmered with muted gold; clouds drifted like slow thoughts! A single bird traced circles above the trees, watching the world wake in its patient way. Somewhere, a door creaked, a kettle hissed, and laughter spilled into the soft air. Moments like this remind us that beauty hides in silence, in motion, in everything unfinished. We rush; we wait; we dream, and still time whispers, "Look closer!" It asks only that we notice before it disappears again into quiet memory.`)
+            })
             $("#300").on("click", () => {
-                setPrompt(`
-                    The sea whispered against the rocks; its voice was low and endless. Salt drifted through the air, clinging to skin, to thought, to everything alive! Each wave seemed to carry a fragment of memory, something once known and half forgotten. A gull cried in the distance; its echo folded into the wide horizon. The sky deepened toward blue, and sunlight scattered across the surface like restless fire.
+                setPrompt(
+`The sea whispered against the rocks; its voice was low and endless. Salt drifted through the air, clinging to skin, to thought, to everything alive! Each wave seemed to carry a fragment of memory, something once known and half forgotten. A gull cried in the distance; its echo folded into the wide horizon. The sky deepened toward blue, and sunlight scattered across the surface like restless fire.
 
-                    A lone figure walked the shore, tracing lines in the wet sand that vanished moments later. He wondered, "Is anything meant to last?" Or is every beautiful thing destined to fade?
+A lone figure walked the shore, tracing lines in the wet sand that vanished moments later. He wondered, "Is anything meant to last?" Or is every beautiful thing destined to fade?
 
-                    Behind him, a small quiet town stirred to life. The smell of bread floated from a bakery, blending with the scent of seaweed and oil. Windows opened; voices joined the morning air, warm, imperfect, ordinary. The world, he thought, was both fragile and relentless. It broke and built itself again with each rising tide!
+Behind him, a small quiet town stirred to life. The smell of bread floated from a bakery, blending with the scent of seaweed and oil. Windows opened; voices joined the morning air, warm, imperfect, ordinary. The world, he thought, was both fragile and relentless. It broke and built itself again with each rising tide!
 
-                    He paused beside a piece of driftwood, bleached by years of sun. The wood was smooth, nearly silver, carved by patience alone. He picked it up, feeling the cool texture beneath his fingertips, and set it upright like a marker. The gesture meant nothing, or perhaps everything, a quiet offering to the vastness around him.
+He paused beside a piece of driftwood, bleached by years of sun. The wood was smooth, nearly silver, carved by patience alone. He picked it up, feeling the cool texture beneath his fingertips, and set it upright like a marker. The gesture meant nothing, or perhaps everything, a quiet offering to the vastness around him.
 
-                    The wind lifted, curling through his hair, carrying the sound of bells from the harbor. Boats shifted softly; ropes creaked; somewhere, a dog barked! He looked once more toward the horizon, where water met sky: that endless meeting of motion and stillness. Then he turned back toward the path, sand clinging to his shoes, the rhythm of the sea fading behind him. "The world continues," he thought, "quiet, infinite, and alive!" And for a moment, he smiled, feeling peace settle gently within his wandering heart, calm and whole again.
-                    `)
+The wind lifted, curling through his hair, carrying the sound of bells from the harbor. Boats shifted softly; ropes creaked; somewhere, a dog barked! He looked once more toward the horizon, where water met sky: that endless meeting of motion and stillness. Then he turned back toward the path, sand clinging to his shoes, the rhythm of the sea fading behind him. "The world continues," he thought, "quiet, infinite, and alive!" And for a moment, he smiled, feeling peace settle gently within his wandering heart, calm and whole again.`)
             });
             timings.name = prompt("Enter name");
         });
