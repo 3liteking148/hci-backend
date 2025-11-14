@@ -4,7 +4,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
 
         <style>
             .roboto-text {
@@ -15,17 +15,34 @@
                 font-variation-settings:
                     "wdth" 100;
                 }
+
+            @media (orientation: portrait) {
+                #content {
+                    display: flex;
+                    flex-direction: column;
+                    height: 100%;
+                }
+                #content > *:not(:last-child) {
+                    flex: 1;
+                    overflow: scroll;
+                }
+            }
         </style>
     </head>
     <body>
-        <div id="prompt" class="roboto-text" style="white-space: pre-wrap; margin: 1rem;">
+        <div id="content">
+            <div id="prompt" class="roboto-text" style="white-space: pre-wrap; margin: 1rem;">
 
+            </div>
+            <textarea id="input" style="width:100%;height:80%;font-size: 20px"></textarea>
+            <div id="buttons">
+                <button id="100">100 words</button>
+                <button id="300">300 words</button>
+                <button id="submit">Submit</button>
+            </div>
         </div>
-        <textarea id="input" style="width:100%;height:80%;font-size: 20px"></textarea>
-        <button id="100">100 words</button>
-        <button id="300">300 words</button>
-        <button id="submit">Submit</button>
     </body>
+    
     <script>
         const timings = {
             name: "",
