@@ -94,6 +94,7 @@
             });
 
             $("#submit").on("click", async (e) => {
+                timings.finalText = $("#input").val();
                 const ret = await fetch(`/api/submit`, {
                     method: "POST",
                     headers: {
